@@ -3,6 +3,7 @@ package com.ln.microsservice.usuario.Persistance.Entities;
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -15,6 +16,7 @@ import lombok.experimental.SuperBuilder;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@Entity
 @SuperBuilder
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Usuario {
