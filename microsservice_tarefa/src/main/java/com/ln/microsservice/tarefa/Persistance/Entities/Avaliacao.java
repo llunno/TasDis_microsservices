@@ -1,5 +1,7 @@
 package com.ln.microsservice.tarefa.Persistance.Entities;
 
+import java.util.UUID;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,15 +23,15 @@ import lombok.NoArgsConstructor;
 public class Avaliacao {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
     private String justificativa;
     private Float nota;
     @OneToOne
     @JoinColumn(name = "tarefa_id")
     private Tarefa tarefa;
     @Column(name = "aluno_id")
-    private Integer aluno;
+    private UUID aluno;
     @Column(name = "professor_id")
-    private Integer professor;
+    private UUID professor;
 }

@@ -1,6 +1,7 @@
 package com.ln.microsservice.tarefa.Persistance.Entities;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,14 +21,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Tarefa {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
     private String titulo;
     private String descricao;
     private LocalDateTime prazo;
     private Float valorEmPontos;
     @Column(name = "materia_id")
-    private Integer materia;
+    private UUID materia;
     private Boolean concluida;
     private Integer percentualConclusao;
 

@@ -1,5 +1,7 @@
 package com.ln.microsservice.endereco.Persistance.Entities;
 
+import java.util.UUID;
+
 import com.ln.microsservice.endereco.Persistance.Entities.Enum.Estado;
 
 import jakarta.persistence.Entity;
@@ -21,8 +23,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Endereco {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
     private Integer numero;
     private String logradouro;
     private String cidade;
