@@ -8,6 +8,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import java.util.UUID;
 
 @Entity
 @Getter
@@ -16,15 +17,15 @@ import lombok.experimental.SuperBuilder;
 public class Estudante extends Usuario {
     private String matricula;
     @Column(name = "cursos_matriculados_ids")
-    private Collection<Integer> cursosMatriculados;
+    private Collection<UUID> cursosMatriculados;
     @Column(name = "tarefas_pendentes_ids")
-    private Collection<Integer> tarefasPendentes;
+    private Collection<UUID> tarefasPendentes;
     @Column(name = "instituicoes_ensino_ids")
-    private Collection<Integer> instituicoesEnsino;
+    private Collection<UUID> instituicoesEnsino;
     @Column(name = "avaliacoes_recebidas_ids")
-    private Collection<Integer> avaliacoesRecebidas;
+    private Collection<UUID> avaliacoesRecebidas;
 
-    public Collection<Integer> obterTarefasPendentes() {
+    public Collection<UUID> obterTarefasPendentes() {
         return tarefasPendentes;
     }
 }

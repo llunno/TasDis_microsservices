@@ -1,6 +1,7 @@
 package com.ln.microsservice.instituicao.Persistance.Entities;
 
 import java.util.Collection;
+import java.util.UUID;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,11 +20,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class InstituicaoEnsino {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
     private String cnpj;
-    private Collection<Integer> cursosDisponiveis;
-    private Collection<Integer> alunos;
-    private Collection<Integer> professores;
-    private Integer disciplina;
+    private Collection<UUID> cursosDisponiveis;
+    private Collection<UUID> alunos;
+    private Collection<UUID> professores;
+    private UUID endereco;
+    private String numeroContato;
 }

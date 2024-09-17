@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import java.util.UUID;
 import com.ln.microsservice.usuario.Business.EstudanteService;
 import com.ln.microsservice.usuario.Business.Utils.Endpoints;
 
@@ -17,7 +17,7 @@ public class EstudanteController {
     private EstudanteService service;
 
     @GetMapping("/{userId}/tarefas-pendentes")
-    private ResponseEntity<?> obterTarefasPendentes(Integer userId) {
+    private ResponseEntity<?> obterTarefasPendentes(UUID userId) {
         return ResponseEntity.ok().body(service.obterTarefasPendentes(userId));
     }
 }

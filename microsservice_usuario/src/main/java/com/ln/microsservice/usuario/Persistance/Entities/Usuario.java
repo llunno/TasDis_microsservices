@@ -1,6 +1,7 @@
 package com.ln.microsservice.usuario.Persistance.Entities;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,13 +22,13 @@ import lombok.experimental.SuperBuilder;
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Usuario {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
     private String nome;
     private LocalDate dataNascimento;
     private Integer numeroContato;
     @Column(name = "endereco_id")
-    private Integer endereco;
+    private UUID endereco;
     private String email;
     private String senha;
 }
