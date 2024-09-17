@@ -29,8 +29,8 @@ public class SecurityConfig {
           cors.configurationSource(corsConfigurationSource());
         })
         .authorizeHttpRequests(authorizeHTTPRequests -> authorizeHTTPRequests
-            .anyRequest().authenticated())
-        .httpBasic(Customizer.withDefaults())
+            .anyRequest().permitAll())
+        // .httpBasic(Customizer.withDefaults())
         .build();
   }
 
