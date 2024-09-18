@@ -3,6 +3,8 @@ package com.ln.microsservice.tarefa.Persistance.Entities;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
+import com.ln.microsservice.tarefa.DTO.TarefaDTO;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -29,11 +31,12 @@ public class Tarefa {
     private Float valorEmPontos;
     @Column(name = "materia_id")
     private UUID materia;
-    private Boolean concluida;
-    private Integer percentualConclusao;
 
-    public void concluir() {
-        this.concluida = true;
-        this.percentualConclusao = 100;
+    public Tarefa(TarefaDTO tarefaDTO) {
+        this.titulo = tarefaDTO.titulo();
+        this.descricao = tarefaDTO.descricao();
+        this.prazo = tarefaDTO.prazo();
+        this.materia = tarefaDTO.materia();
+        this.valorEmPontos = tarefaDTO.valorEmPontos();
     }
 }

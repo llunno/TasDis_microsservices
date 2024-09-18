@@ -24,8 +24,6 @@ public class PopulateUserDB {
     @Test
     void populate() {
 
-        UUID idEstudante = UUID.fromString("79526cd4-345d-4b0d-a381-add03f450d47");
-        UUID idProfessor = UUID.fromString("19d2217d-8f5d-4738-a495-d50b6d8aa33f");
         UUID idEnderecoEst = UUID.fromString("e99a4202-d074-45b7-9c27-ae987a875105");
         UUID idEnderecoProf = UUID.fromString("3f7442df-a11e-4738-8253-30a0c74622b5");
         UUID idCursos = UUID.fromString("3f7442df-a11e-4738-8253-30a0c74622b5");
@@ -33,7 +31,6 @@ public class PopulateUserDB {
         UUID idMateriaLecionada = UUID.fromString("3f7442df-a11e-4738-8253-30a0c74622b5");
 
         Estudante estudante = Estudante.builder()
-                .id(idEstudante)
                 .nome("Lucas")
                 .email("lucas@gmail.com")
                 .senha("123@TestePass")
@@ -41,12 +38,12 @@ public class PopulateUserDB {
                 .cursosMatriculados(List.of(idCursos))
                 .dataNascimento(LocalDate.of(2005, 8, 1))
                 .instituicoesEnsino(List.of(idInstituicoesEnsino))
+                .tarefasPendentes(List.of(UUID.randomUUID()))
                 .numeroContato(123456789)
                 .matricula("123456/est")
                 .build();
 
         Professor professor = Professor.builder()
-                .id(idProfessor)
                 .nome("Paulo")
                 .email("Paulo@gmail.com")
                 .senha("123@TestePass")
