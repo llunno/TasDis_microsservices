@@ -18,9 +18,9 @@ public class AlunoController {
     @Autowired
     private TarefaService tarefaService;
 
-    @GetMapping("/{userId}/tarefas-pendentes")
-    public ResponseEntity<?> getTarefasPendentes(@PathVariable UUID userId) {
-        List<TarefaDTO> tarefasPendentes = tarefaService.getTarefasPendentes(userId);
+    @GetMapping("/{userId}/tarefas")
+    public ResponseEntity<?> getTodasTarefas(@PathVariable UUID userId) {
+        List<TarefaDTO> tarefasPendentes = tarefaService.getAllTarefas(userId);
         return ResponseEntity.ok(tarefasPendentes);
     }
 

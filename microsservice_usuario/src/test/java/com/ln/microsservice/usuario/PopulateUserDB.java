@@ -37,8 +37,7 @@ public class PopulateUserDB {
                 .endereco(idEnderecoEst)
                 .cursosMatriculados(List.of(idCursos))
                 .dataNascimento(LocalDate.of(2005, 8, 1))
-                .instituicoesEnsino(List.of(idInstituicoesEnsino))
-                .tarefasPendentes(List.of(UUID.randomUUID()))
+                .instituicaoEnsino(idInstituicoesEnsino)
                 .numeroContato(123456789)
                 .matricula("123456/est")
                 .build();
@@ -50,7 +49,7 @@ public class PopulateUserDB {
                 .endereco(idEnderecoProf)
                 .materiasLecionadas(List.of(idMateriaLecionada))
                 .dataNascimento(LocalDate.of(1999, 1, 1))
-                .instituicoesEnsino(List.of(idInstituicoesEnsino))
+                .instituicaoEnsino(idInstituicoesEnsino)
                 .numeroContato(987654321)
                 .matricula("123456/pf")
                 .build();

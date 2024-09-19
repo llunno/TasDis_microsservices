@@ -24,4 +24,9 @@ public class TarefaController {
         TarefaDTO tarefa = service.obterTarefaPorId(id);
         return ResponseEntity.ok(tarefa);
     }
+
+    @GetMapping("/obter-todas-por-materia")
+    public ResponseEntity<?> obterTodasTarefasPorMateria(@RequestParam UUID materiaId) {
+        return ResponseEntity.ok(service.obterTodasTarefasPorMateria(materiaId));
+    }
 }

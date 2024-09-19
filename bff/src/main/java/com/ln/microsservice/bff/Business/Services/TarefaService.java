@@ -6,17 +6,17 @@ import java.util.UUID;
 
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.amqp.utils.SerializationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
-
+import java.time.LocalDateTime;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.ln.microsservice.bff.Business.Config.WebClientInstancesConfig;
+import com.ln.microsservice.bff.DTO.MateriaDTO;
 import com.ln.microsservice.bff.DTO.TarefaDTO;
+import java.util.stream.Collectors;
 
 @Service
 public class TarefaService {
@@ -26,39 +26,25 @@ public class TarefaService {
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
-
+    @Autowired
+    private CursoService cursoService;
+    @Autowired
+    private ObterIdsRelacoesService obterIdsRelacoesService;
     @Autowired
     private Queue tarefasQueue;
 
     private ObjectMapper objectMapper = JsonMapper.builder().findAndAddModules().build();
 
-    public List<TarefaDTO> getTarefasPendentes(UUID userId) {
+    public List<TarefaDTO> getAllTarefas(UUID userId) {
 
-        List<UUID> idsTarefasPendentes = webClientEndpoints.webClientUsuarioDomain()
-                .get()
-                .uri("/estudante/" + userId + "/tarefas-pendentes")
-                .retrieve()
-                .bodyToMono(new ParameterizedTypeReference<List<UUID>>() {
-                })
-                .block();
+        List<UUID> cursosId = (List<UUID>) obterIdsRelacoesService.getCursosIdByEstudante(userId);
 
-        List<TarefaDTO> tarefasPendentes = new ArrayList<>();
+        List<TarefaDTO> todasAsTarefas = cursosId.stream()
+                .map(cursoId -> getTarefasPorCurso(cursoId))
+                .flatMap(List::stream)
+                .collect(Collectors.toList());
 
-        if (idsTarefasPendentes == null) {
-            return tarefasPendentes;
-        }
-
-        idsTarefasPendentes.forEach(id -> {
-            TarefaDTO tarefa = webClientEndpoints.webClientTarefaDomain()
-                    .get()
-                    .uri("/tarefa/obter?id=" + id)
-                    .retrieve()
-                    .bodyToMono(TarefaDTO.class)
-                    .block();
-            tarefasPendentes.add(tarefa);
-        });
-
-        return tarefasPendentes;
+        return todasAsTarefas;
     }
 
     public void criarTarefa(TarefaDTO entity) throws JsonProcessingException {
@@ -66,27 +52,40 @@ public class TarefaService {
         rabbitTemplate.convertAndSend(tarefasQueue.getName(), tarefaDtoJson);
     }
 
-    public List<TarefaDTO> getTarefasVencidas(UUID userId) {
-        List<UUID> idsCursosMatriculados = webClientEndpoints.webClientUsuarioDomain()
-                .get()
-                .uri("/estudante/" + userId + "/cursos-matriculados")
-                .retrieve()
-                .bodyToMono(new ParameterizedTypeReference<List<UUID>>() {
-                })
-                .block();
+    public List<TarefaDTO> getTarefasPorCurso(UUID userId) {
+        List<UUID> idsCursosMatriculados = (List<UUID>) obterIdsRelacoesService.getCursosIdByEstudante(userId);
 
-        idsTarefasVencidas.forEach(id -> {
-            TarefaDTO tarefa = webClientEndpoints.webClientTarefaDomain()
+        List<List<MateriaDTO>> materiasPorCurso = idsCursosMatriculados.stream()
+                .map(cursoId -> cursoService.obterMateriasPorCurso(cursoId)).collect(Collectors.toList());
+
+        List<MateriaDTO> materiaisConsolidados = materiasPorCurso.stream()
+                .flatMap(List::stream)
+                .collect(Collectors.toList());
+
+        List<List<TarefaDTO>> tarefasPorMateria = new ArrayList<>();
+        materiaisConsolidados.forEach(materia -> {
+            List<TarefaDTO> tarefa = webClientEndpoints.webClientTarefaDomain()
                     .get()
-                    .uri("/tarefa/obter?id=" + id)
+                    .uri("/tarefa/obter-todas-por-materia?materiaId=" + materia.id())
                     .retrieve()
-                    .bodyToMono(TarefaDTO.class)
+                    .bodyToMono(new ParameterizedTypeReference<List<TarefaDTO>>() {
+                    })
                     .block();
-            tarefasVencidas.add(tarefa);
+            tarefasPorMateria.add(tarefa);
         });
+
+        return tarefasPorMateria.stream()
+                .flatMap(List::stream)
+                .collect(Collectors.toList());
+    }
+
+    public List<TarefaDTO> getTarefasVencidas(UUID cursoId) {
+        List<TarefaDTO> tarefasPorCurso = getTarefasPorCurso(cursoId);
+
+        var tarefasVencidas = tarefasPorCurso.stream()
+                .filter(tarefa -> tarefa.prazo().isBefore(LocalDateTime.now()))
+                .collect(Collectors.toList());
 
         return tarefasVencidas;
     }
-
-    public 
 }

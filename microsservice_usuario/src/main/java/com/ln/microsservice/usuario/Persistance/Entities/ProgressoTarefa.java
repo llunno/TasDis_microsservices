@@ -1,31 +1,31 @@
-package com.ln.microsservice.curso.Persistance.Entities;
+package com.ln.microsservice.usuario.Persistance.Entities;
 
-import java.util.Collection;
-import java.util.UUID;
-
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToOne;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import java.util.UUID;
 
-@Entity
 @Getter
 @Builder
-@AllArgsConstructor(access = AccessLevel.PRIVATE)
+@Entity
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Materia {
+public class ProgressoTarefa {
+
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-    private String nome;
-    private String descricao;
-    @ManyToMany
-    private Collection<Curso> cursos;
+    @Column(name = "tarefa_id")
+    private UUID tarefa;
+    private Integer porcentagemConcluida;
+    @ManyToOne
+    private Estudante estudante;
 }

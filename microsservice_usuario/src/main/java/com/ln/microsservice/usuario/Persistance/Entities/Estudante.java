@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,8 +19,8 @@ public class Estudante extends Usuario {
     private String matricula;
     @Column(name = "cursos_matriculados_ids")
     private Collection<UUID> cursosMatriculados;
-    @Column(name = "tarefas_pendentes_ids")
-    private Collection<UUID> tarefasPendentes;
-    @Column(name = "instituicoes_ensino_id")
-    private UUID instituicoesEnsino;
+    @Column(name = "instituicao_ensino_id")
+    private UUID instituicaoEnsino;
+    @OneToMany(mappedBy = "estudante")
+    private Collection<ProgressoTarefa> tarefasIniciadas;
 }

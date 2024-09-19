@@ -9,5 +9,4 @@ class BffApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
 }

@@ -31,6 +31,8 @@ public class Tarefa {
     private Float valorEmPontos;
     @Column(name = "materia_id")
     private UUID materia;
+    @Column(name = "professor_criador_id")
+    private UUID professorCriador;
 
     public Tarefa(TarefaDTO tarefaDTO) {
         this.titulo = tarefaDTO.titulo();

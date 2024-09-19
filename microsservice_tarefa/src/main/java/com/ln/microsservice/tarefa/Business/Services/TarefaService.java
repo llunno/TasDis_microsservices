@@ -1,7 +1,10 @@
 package com.ln.microsservice.tarefa.Business.Services;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -30,11 +33,17 @@ public class TarefaService {
                 .orElseThrow(() -> new NullPointerException("Tarefa nao encontrada"));
         return new TarefaDTO(tarefa);
     }
-    
+
     @RabbitHandler
     public void criarTarefa(@Payload String tarefaObj) throws StreamReadException, DatabindException, IOException {
         TarefaDTO tarefaDTO = mapper.readValue(tarefaObj, TarefaDTO.class);
         Tarefa tarefa = new Tarefa(tarefaDTO);
         tarefaRepository.save(tarefa);
+    }
+
+    public Collection<TarefaDTO> obterTodasTarefasPorMateria(UUID materiaId) {
+        Collection<Tarefa> tarefas = tarefaRepository.findAllByMateria(materiaId)
+                .orElseThrow(() -> new NullPointerException("Nenhuma tarefa encontrada"));
+        return tarefas.stream().map(TarefaDTO::new).collect(Collectors.toList());
     }
 }

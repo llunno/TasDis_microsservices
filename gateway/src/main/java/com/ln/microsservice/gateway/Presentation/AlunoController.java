@@ -18,9 +18,16 @@ public class AlunoController {
     @Autowired
     private WebClient webClient;
 
-    @GetMapping("/{userId}/tarefas-pendentes")
+    @GetMapping("/{userId}/tarefas")
     public ResponseEntity<?> getTarefasPendentes(@PathVariable UUID userId) {
-        String response = webClient.get().uri("/aluno/" + userId + "/tarefas-pendentes").retrieve()
+        String response = webClient.get().uri("/aluno/" + userId + "/tarefas").retrieve()
+                .bodyToMono(String.class).block();
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/{userId}/tarefas-vencidas")
+    public ResponseEntity<?> getTarefasVencidas(@PathVariable UUID userId) {
+        String response = webClient.get().uri("/aluno/" + userId + "/tarefas-vencidas").retrieve()
                 .bodyToMono(String.class).block();
         return ResponseEntity.ok(response);
     }

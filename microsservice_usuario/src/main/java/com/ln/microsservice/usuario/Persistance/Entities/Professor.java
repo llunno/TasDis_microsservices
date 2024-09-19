@@ -18,6 +18,6 @@ public class Professor extends Usuario {
     private String matricula;
     @Column(name = "materias_lecionadas_ids")
     private Collection<UUID> materiasLecionadas;
-    @Column(name = "instituicoes_ensino_id")
-    private UUID instituicoesEnsino;
+    @Column(name = "instituicao_ensino_id")
+    private UUID instituicaoEnsino;
 }

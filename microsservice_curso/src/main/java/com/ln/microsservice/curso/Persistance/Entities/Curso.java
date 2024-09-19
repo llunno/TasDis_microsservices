@@ -7,12 +7,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.ManyToMany;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import java.util.Collection;
 
 @Entity
 @Getter
@@ -26,8 +27,8 @@ public class Curso {
     private String name;
     private String descricao;
     private Float cargaHoraria;
-    @ManyToOne
-    private Materia materia;
+    @ManyToMany
+    private Collection<Materia> materias;
     @Column(name = "instituicao_ensino_id")
     private Integer instituicaoEnsino;
 }

@@ -17,11 +17,6 @@ public class EstudanteController {
     @Autowired
     private EstudanteService service;
 
-    @GetMapping("/{userId}/tarefas-pendentes")
-    public ResponseEntity<?> obterTarefasPendentes(@PathVariable UUID userId) {
-        return ResponseEntity.ok().body(service.obterTarefasPendentes(userId));
-    }
-
     @GetMapping("/{userId}/cursos-matriculados")
     public ResponseEntity<?> obterCursosMatriculados(@PathVariable UUID userId) {
         return ResponseEntity.ok().body(service.obterCursosMatriculados(userId));
