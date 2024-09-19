@@ -23,4 +23,10 @@ public class AlunoController {
         List<TarefaDTO> tarefasPendentes = tarefaService.getTarefasPendentes(userId);
         return ResponseEntity.ok(tarefasPendentes);
     }
+
+    @GetMapping("/{userId}/tarefas-vencidas")
+    public ResponseEntity<?> getTarefasVencidas(@PathVariable UUID userId) {
+        List<TarefaDTO> tarefasVencidas = tarefaService.getTarefasVencidas(userId);
+        return ResponseEntity.ok(tarefasVencidas);
+    }
 }

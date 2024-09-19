@@ -21,4 +21,14 @@ public class EstudanteController {
     public ResponseEntity<?> obterTarefasPendentes(@PathVariable UUID userId) {
         return ResponseEntity.ok().body(service.obterTarefasPendentes(userId));
     }
+
+    @GetMapping("/{userId}/cursos-matriculados")
+    public ResponseEntity<?> obterCursosMatriculados(@PathVariable UUID userId) {
+        return ResponseEntity.ok().body(service.obterCursosMatriculados(userId));
+    }
+
+    @GetMapping("/{userId}/instituicoes-matriculadas")
+    public ResponseEntity<?> obterInstituicoesMatriculadas(@PathVariable UUID userId) {
+        return ResponseEntity.ok().body(service.obterInstituicoesMatriculadas(userId));
+    }
 }

@@ -65,4 +65,28 @@ public class TarefaService {
         String tarefaDtoJson = objectMapper.writeValueAsString(entity);
         rabbitTemplate.convertAndSend(tarefasQueue.getName(), tarefaDtoJson);
     }
+
+    public List<TarefaDTO> getTarefasVencidas(UUID userId) {
+        List<UUID> idsCursosMatriculados = webClientEndpoints.webClientUsuarioDomain()
+                .get()
+                .uri("/estudante/" + userId + "/cursos-matriculados")
+                .retrieve()
+                .bodyToMono(new ParameterizedTypeReference<List<UUID>>() {
+                })
+                .block();
+
+        idsTarefasVencidas.forEach(id -> {
+            TarefaDTO tarefa = webClientEndpoints.webClientTarefaDomain()
+                    .get()
+                    .uri("/tarefa/obter?id=" + id)
+                    .retrieve()
+                    .bodyToMono(TarefaDTO.class)
+                    .block();
+            tarefasVencidas.add(tarefa);
+        });
+
+        return tarefasVencidas;
+    }
+
+    public 
 }

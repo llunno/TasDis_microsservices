@@ -24,8 +24,4 @@ public class Estudante extends Usuario {
     private Collection<UUID> instituicoesEnsino;
     @Column(name = "avaliacoes_recebidas_ids")
     private Collection<UUID> avaliacoesRecebidas;
-
-    public Collection<UUID> obterTarefasPendentes() {
-        return tarefasPendentes;
-    }
 }

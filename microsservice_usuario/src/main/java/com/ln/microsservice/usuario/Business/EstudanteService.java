@@ -15,8 +15,21 @@ public class EstudanteService {
     @Autowired
     private EstudanteRepository estudanteRepository;
 
-    public  Collection<UUID> obterTarefasPendentes(UUID id) {
-        Estudante estudante = estudanteRepository.findById(id).orElseThrow(() -> new NotFoundException("Estudante nao encontrado"));
-        return estudante.obterTarefasPendentes();
+    public Collection<UUID> obterTarefasPendentes(UUID id) {
+        Estudante estudante = estudanteRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Estudante nao encontrado"));
+        return estudante.getTarefasPendentes();
+    }
+
+    public Collection<UUID> obterCursosMatriculados(UUID userId) {
+        Estudante estudante = estudanteRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("Estudante nao encontrado"));
+        return estudante.getCursosMatriculados();
+    }
+
+    public Collection<UUID> obterInstituicoesMatriculadas(UUID userId) {
+        Estudante estudante = estudanteRepository.findById(userId)
+                .orElseThrow(() -> new NotFoundException("Estudante nao encontrado"));
+        return estudante.getInstituicoesEnsino();
     }
 }
