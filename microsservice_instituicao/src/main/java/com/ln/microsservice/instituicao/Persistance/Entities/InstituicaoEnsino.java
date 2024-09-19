@@ -23,9 +23,6 @@ public class InstituicaoEnsino {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String cnpj;
-    private Collection<UUID> cursosDisponiveis;
-    private Collection<UUID> alunos;
-    private Collection<UUID> professores;
     private UUID endereco;
     private String numeroContato;
 }

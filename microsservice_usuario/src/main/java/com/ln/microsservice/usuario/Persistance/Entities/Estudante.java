@@ -20,8 +20,6 @@ public class Estudante extends Usuario {
     private Collection<UUID> cursosMatriculados;
     @Column(name = "tarefas_pendentes_ids")
     private Collection<UUID> tarefasPendentes;
-    @Column(name = "instituicoes_ensino_ids")
-    private Collection<UUID> instituicoesEnsino;
-    @Column(name = "avaliacoes_recebidas_ids")
-    private Collection<UUID> avaliacoesRecebidas;
+    @Column(name = "instituicoes_ensino_id")
+    private UUID instituicoesEnsino;
 }
