@@ -8,20 +8,19 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.ln.microsservice.bff.Business.Config.AmqpConfig;
-import com.ln.microsservice.bff.DTO.EstudanteRegisterReqDTO;
+import com.ln.microsservice.bff.DTO.ProfessorRegisterReqDTO;
 
 @Service
-public class EstudanteService {
+public class ProfessorService {
 
     @Autowired
     private AmqpConfig amqpConfig;
     @Autowired
     private RabbitTemplate rabbitTemplate;
-
     private ObjectMapper objectMapper = JsonMapper.builder().findAndAddModules().build();
 
-    public void criarEstudante(EstudanteRegisterReqDTO estudante) throws JsonProcessingException {
-        String estudanteDtoJson = objectMapper.writeValueAsString(estudante);
-        rabbitTemplate.convertAndSend(amqpConfig.estudantesQueue().getName(), estudanteDtoJson);
+    public void criarProfessor(ProfessorRegisterReqDTO professor) throws JsonProcessingException {
+        String professorDtoJson = objectMapper.writeValueAsString(professor);
+        rabbitTemplate.convertAndSend(amqpConfig.professoresQueue().getName(), professorDtoJson);
     }
 }

@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import java.util.UUID;
 
+import com.ln.microsservice.usuario.DTOs.EstudanteDTO;
+
 @Entity
 @Getter
 @SuperBuilder
@@ -23,4 +25,12 @@ public class Estudante extends Usuario {
     private UUID instituicaoEnsino;
     @OneToMany(mappedBy = "estudante")
     private Collection<ProgressoTarefa> tarefasIniciadas;
+
+    public Estudante(EstudanteDTO estudante) {
+        super(null, estudante.nome(), estudante.dataNascimento(), estudante.numeroContato(), estudante.endereco(),
+                estudante.email(), estudante.senha());
+        this.matricula = estudante.matricula();
+        this.instituicaoEnsino = estudante.instituicaoEnsino();
+        this.cursosMatriculados = estudante.cursosMatriculados();
+    }
 }

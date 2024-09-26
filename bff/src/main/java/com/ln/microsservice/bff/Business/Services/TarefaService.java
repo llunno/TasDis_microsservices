@@ -1,6 +1,7 @@
 package com.ln.microsservice.bff.Business.Services;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
@@ -23,7 +24,6 @@ public class TarefaService {
 
     @Autowired
     private WebClientInstancesConfig webClientEndpoints;
-
     @Autowired
     private RabbitTemplate rabbitTemplate;
     @Autowired
@@ -87,5 +87,17 @@ public class TarefaService {
                 .collect(Collectors.toList());
 
         return tarefasVencidas;
+    }
+
+    public List<TarefaDTO> obterTodasTarefasPorProfessor(UUID professorId) {
+        List<TarefaDTO> tarefas = webClientEndpoints.webClientTarefaDomain()
+                .get()
+                .uri("/tarefa/obter-todas-por-professor?professorId=" + professorId)
+                .retrieve()
+                .bodyToMono(new ParameterizedTypeReference<List<TarefaDTO>>() {
+                })
+                .block();
+
+        return tarefas;
     }
 }

@@ -1,6 +1,5 @@
 package com.ln.microsservice.instituicao.Persistance.Entities;
 
-import java.util.Collection;
 import java.util.UUID;
 
 import jakarta.persistence.Entity;

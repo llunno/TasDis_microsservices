@@ -6,6 +6,9 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.ln.microsservice.gateway.Business.Documentation.CriarTarefaApiDoc;
+import com.ln.microsservice.gateway.Business.Documentation.NovoProfessorAPiDoc;
+
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RestController
 @CrossOrigin(origins = "*")
 @RequestMapping("/professor")
+@Tag(name = "Professor", description = "Endpoints para o contexto do professor")
 public class ProfessorController {
 
     @Autowired
@@ -30,6 +34,14 @@ public class ProfessorController {
                 .retrieve()
                 .bodyToMono(ResponseEntity.class)
                 .block();
+        return response;
+    }
+
+    @NovoProfessorAPiDoc
+    @PostMapping("/novo-professor")
+    public ResponseEntity<?> novoProfessor(@RequestBody JsonNode entity) {
+        ResponseEntity<?> response = webClient.post().uri("/aluno/novo-professor").bodyValue(entity).retrieve()
+                .bodyToMono(ResponseEntity.class).block();
         return response;
     }
 }

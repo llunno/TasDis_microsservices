@@ -12,4 +12,6 @@ import com.ln.microsservice.tarefa.Persistance.Entities.Tarefa;
 public interface TarefaRepository extends JpaRepository<Tarefa, UUID> {
 
     Optional<Collection<Tarefa>> findAllByMateria(UUID materiaId);
+
+    Optional<Collection<Tarefa>> findAllByProfessorCriador(UUID professorId);
 }

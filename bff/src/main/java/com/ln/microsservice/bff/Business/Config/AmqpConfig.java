@@ -10,9 +10,23 @@ public class AmqpConfig {
 
     @Value("${tarefas.queue}")
     private String tarefasQueueName;
+    @Value("${estudantes.queue}")
+    private String estudantesQueueName;
+    @Value("${professores.queue}")
+    private String professoresQueueName;
 
     @Bean
     public Queue tarefasQueue() {
         return new Queue(tarefasQueueName, true);
+    }
+
+    @Bean
+    public Queue estudantesQueue() {
+        return new Queue(estudantesQueueName, true);
+    }
+
+    @Bean
+    public Queue professoresQueue() {
+        return new Queue(professoresQueueName, true);
     }
 }

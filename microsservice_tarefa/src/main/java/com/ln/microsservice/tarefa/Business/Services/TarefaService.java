@@ -46,4 +46,14 @@ public class TarefaService {
                 .orElseThrow(() -> new NullPointerException("Nenhuma tarefa encontrada"));
         return tarefas.stream().map(TarefaDTO::new).collect(Collectors.toList());
     }
+
+    public Collection<TarefaDTO> obterTodasTarefas() {
+        return tarefaRepository.findAll().stream().map(TarefaDTO::new).collect(Collectors.toList());
+    }
+
+    public Collection<TarefaDTO> obterTodasTarefasPorProfessor(UUID professorId) {
+        Collection<Tarefa> tarefas = tarefaRepository.findAllByProfessorCriador(professorId)
+                .orElseThrow(() -> new NullPointerException("Nenhuma tarefa encontrada"));
+        return tarefas.stream().map(TarefaDTO::new).collect(Collectors.toList());
+    }
 }

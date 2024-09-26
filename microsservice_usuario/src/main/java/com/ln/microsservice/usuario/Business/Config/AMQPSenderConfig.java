@@ -11,9 +11,16 @@ public class AMQPSenderConfig {
 
     @Value("${queue.name}")
     private String queueName;
+    @Value("${professores.queue}")
+    private String professoresQueue;
 
     @Bean
     public Queue queue() {
         return new Queue(queueName, true);
+    }
+
+    @Bean
+    public Queue professoresQueue() {
+        return new Queue(professoresQueue, true);
     }
 }

@@ -29,4 +29,14 @@ public class TarefaController {
     public ResponseEntity<?> obterTodasTarefasPorMateria(@RequestParam UUID materiaId) {
         return ResponseEntity.ok(service.obterTodasTarefasPorMateria(materiaId));
     }
+
+    @GetMapping("/todas-tarefas")
+    public ResponseEntity<?> obterTodasTarefas() {
+        return ResponseEntity.ok(service.obterTodasTarefas());
+    }
+
+    @GetMapping("/obter-todas-por-professor")
+    public ResponseEntity<?> obterTodasTarefasPorProfessor(@RequestParam UUID professorId) {
+        return ResponseEntity.ok(service.obterTodasTarefasPorProfessor(professorId));
+    }
 }
