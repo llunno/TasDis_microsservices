@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  bff
+  namespace: default
+  labels:
+    app:  bff
+spec:
+  selector:
+    matchLabels:
+      app: bff
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app:  bff
+    spec:
+      containers:
+      - name:  bff
+        image:  ghcr.io/llunno/tasdis-bff:latest
+        ports:
+        - containerPort:  8086
+          name:  bff
+      restartPolicy: Always

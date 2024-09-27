@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  curso
+  namespace: default
+  labels:
+    app:  curso
+spec:
+  selector:
+    matchLabels:
+      app: curso
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app:  curso
+    spec:
+      containers:
+      - name:  curso
+        image:  ghcr.io/llunno/tasdis-curso:latest
+        ports:
+        - containerPort:  8084
+          name:  curso
+      restartPolicy: Always

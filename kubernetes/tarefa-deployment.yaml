@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  tarefa
+  namespace: default
+  labels:
+    app:  tarefa
+spec:
+  selector:
+    matchLabels:
+      app: tarefa
+  replicas: 1
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app:  tarefa
+    spec:
+      containers:
+      - name:  tarefa
+        image:  ghcr.io/llunno/tasdis-tarefa:latest
+        ports:
+        - containerPort:  8080
+          name:  tarefa
+      restartPolicy: Always

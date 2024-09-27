@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: instituicao-service
+  namespace: default
+spec:
+  selector:
+    app: instituicao
+  type: ClusterIP
+  sessionAffinity: None
+  sessionAffinityConfig:
+    clientIP:
+      timeoutSeconds: 10800
+  ports:
+  - name: instituicao-service
+    protocol: TCP
+    port: 8082
+    targetPort: 8082
