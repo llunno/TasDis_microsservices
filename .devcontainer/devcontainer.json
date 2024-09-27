@@ -30,13 +30,14 @@
 	"forwardPorts": [8080, 8081, 8082, 8083, 8085, 8086],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "nohup bash -c 'minikube start &' > minikube.log 2>&1",
+	"postCreateCommand": "minikube start",
 
 	// Use 'postStartCommand' to run commands after the container is created like starting minikube.
 	"postStartCommand": {
-		"install-k9s": "curl -sS https://webinstall.dev/k9s | bash",
-		"install-helmpkgs": "helm install rabbitmq oci://registry-1.docker.io/bitnamicharts/rabbitmq && helm install postgressql oci://registry-1.docker.io/bitnamicharts/postgresql"
+		"install-k9s": "curl -sS https://webinstall.dev/k9s | bash"
 	},
+	
+	"postAttachCommand": "helm upgrade -i rabbitmq oci://registry-1.docker.io/bitnamicharts/rabbitmq && helm upgrade -i postgressql oci://registry-1.docker.io/bitnamicharts/postgresql",
 
 	// Configure tool-specific properties.
 	"customizations": {
@@ -61,7 +62,6 @@
 				"Gruntfuggly.todo-tree",
 				"tombonnike.vscode-status-bar-format-toggle",
 				"cweijan.vscode-database-client2",
-				"cweijan.vscode-postgresql-client2",
 				"rohinivsenthil.rabbitrace"
 			]
 		}
