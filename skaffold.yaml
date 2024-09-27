@@ -1,0 +1,53 @@
+apiVersion: skaffold/v4beta11
+kind: Config
+metadata:
+  name: tasdis-microsservices
+build:
+  local:
+    useDockerCLI: true
+    useBuildkit: true
+  artifacts:
+    - image: ghcr.io/llunno/tasdis-bff
+      context: bff
+      docker:
+        dockerfile: Dockerfile
+    - image: ghcr.io/llunno/tasdis-curso
+      context: microsservice_curso
+      docker:
+        dockerfile: Dockerfile
+    - image: ghcr.io/llunno/tasdis-endereco
+      context: microsservice_endereco
+      docker:
+        dockerfile: Dockerfile
+    - image: ghcr.io/llunno/tasdis-gateway
+      context: gateway
+      docker:
+        dockerfile: Dockerfile
+    - image: ghcr.io/llunno/tasdis-instituicao
+      context: microsservice_instituicao
+      docker:
+        dockerfile: Dockerfile
+    - image: ghcr.io/llunno/tasdis-tarefa
+      context: microsservice_tarefa
+      docker:
+        dockerfile: Dockerfile
+    - image: ghcr.io/llunno/tasdis-usuario
+      context: microsservice_usuario
+      docker:
+        dockerfile: Dockerfile
+manifests:
+  rawYaml:
+    - kubernetes/bff-deployment.yaml
+    - kubernetes/bff-service.yaml
+    - kubernetes/curso-deployment.yaml
+    - kubernetes/curso-service.yaml
+    - kubernetes/endereco-deployment.yaml
+    - kubernetes/endereco-service.yaml
+    - kubernetes/gateway-deployment.yaml
+    - kubernetes/gateway-service.yaml
+    - kubernetes/instituicao-deployment.yaml
+    - kubernetes/instituicao-service.yaml
+    - kubernetes/tarefa-deployment.yaml
+    - kubernetes/tarefa-service.yaml
+    - kubernetes/usuario-deployment.yaml
+    - kubernetes/usuario-service.yaml
