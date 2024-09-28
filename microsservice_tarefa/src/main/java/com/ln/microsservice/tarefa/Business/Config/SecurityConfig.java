@@ -14,7 +14,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @Configuration
 public class SecurityConfig {
 
-    @Value("${bff.url}")
+    @Value("${permitted.request.url}")
     private String allowedOrigin;
 
     @Bean

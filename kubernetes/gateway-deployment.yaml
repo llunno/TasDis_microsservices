@@ -26,4 +26,11 @@ spec:
         ports:
         - containerPort:  8085
           name:  gateway
+        resources:
+          limits:
+            cpu: "2"
+            memory: "512Mi"
+          requests:
+            cpu: "1"
+            memory: "256Mi"
       restartPolicy: Always

@@ -2,6 +2,7 @@
 // README at: https://github.com/devcontainers/templates/tree/main/src/kubernetes-helm-minikube
 {
 	"name": "Kubernetes - Minikube-in-Docker",
+	"runArgs": ["--name=TasDis-Microservices"],
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	"dockerFile": "Dockerfile",
 
@@ -28,18 +29,18 @@
 	},
 	
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	"forwardPorts": [8080, 8081, 8082, 8083, 8084, 8085, 8086],
+	// forwarding gateway port 8080, postgres port 5432, rabbitmq port 15672.
+	"forwardPorts": [8080, 5432, 15672],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
 	"postCreateCommand": "minikube start",
 
 	// Use 'postStartCommand' to run commands after the container is created like starting minikube.
 	"postStartCommand": {
-		"install-k9s": "curl -sS https://webinstall.dev/k9s | bash"
+		"install-k9s": "curl -sS https://webinstall.dev/k9s | bash",
+		"install-helm-pkgs": "helm upgrade -i rabbitmq oci://registry-1.docker.io/bitnamicharts/rabbitmq && helm upgrade -i -f .devcontainer/pg-values.yaml postgresql oci://registry-1.docker.io/bitnamicharts/postgresql"
 	},
 	
-	"postAttachCommand": "helm upgrade -i rabbitmq oci://registry-1.docker.io/bitnamicharts/rabbitmq && helm upgrade -i postgressql oci://registry-1.docker.io/bitnamicharts/postgresql",
-
 	// Configure tool-specific properties.
 	"customizations": {
 		"vscode": {
@@ -63,7 +64,8 @@
 				"Gruntfuggly.todo-tree",
 				"tombonnike.vscode-status-bar-format-toggle",
 				"cweijan.vscode-database-client2",
-				"rohinivsenthil.rabbitrace"
+				"rohinivsenthil.rabbitrace",
+				"chrisdias.vscode-opennewinstance"
 			]
 		}
 	}

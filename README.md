@@ -8,11 +8,11 @@
 
 # TasDis
 
-**TasDis** is a Distributed system where teachers and students can keep track and monitor their academical duties. This project was developed for Scalable Software Engineering class from Instituto Infnet.
+**TasDis** is a Distributed system where teachers and students can keep track and monitor their academical duties. This project was developed for Scalable Software Engineering class from Infnet Institute.
 
 ## How to run locally
 
-The projects provides a [devcontainer](https://containers.dev/) environment to easily run the project locally.
+The projects provides a [devcontainer](https://containers.dev/) environment to easily run it locally.
 
 **The docker image will provide the following features in the container**:
 
@@ -44,3 +44,5 @@ The projects provides a [devcontainer](https://containers.dev/) environment to e
 ```
 
 **3.** Access the Swagger UI in the URL `http://localhost:8080/swagger-ui/index.html`.
+
+**OBS**: If it isn't the first time you're running a postgresql helm chart, the postgreSQL persistent volume may already be created. In this case, the databases for the microsservices may not be created because custom scripts are only executed when the container is started for the first time. To solve this, make sure to delete the persistent volume claim associated with the postgreSQL deployment.

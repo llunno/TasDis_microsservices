@@ -1,0 +1,11 @@
+primary:
+  initdb:
+    scripts:
+      init.sql: |
+        CREATE DATABASE tarefas_microsservice WITH OWNER = postgres ENCODING = 'UTF8';
+        CREATE DATABASE cursos_microsservice WITH OWNER = postgres ENCODING = 'UTF8';
+        CREATE DATABASE enderecos_microsservice WITH OWNER = postgres ENCODING = 'UTF8';
+        CREATE DATABASE usuarios_microsservice WITH OWNER = postgres ENCODING = 'UTF8';
+        CREATE DATABASE instituicoes_microsservice WITH OWNER = postgres ENCODING = 'UTF8';
+image:
+  debug: true

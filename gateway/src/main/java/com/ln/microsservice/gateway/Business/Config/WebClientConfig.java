@@ -8,7 +8,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 @Configuration
 public class WebClientConfig {
 
-    @Value("${bff.url}")
+    @Value("${permitted.request.url}")
     private String bffUrl;
 
     @Bean
