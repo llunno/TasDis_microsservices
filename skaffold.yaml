@@ -6,6 +6,8 @@ build:
   local:
     useDockerCLI: true
     useBuildkit: true
+    concurrency: 0
+    push: true
   artifacts:
     - image: ghcr.io/llunno/tasdis-bff
       context: bff
