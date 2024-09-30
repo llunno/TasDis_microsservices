@@ -4,7 +4,6 @@ metadata:
   name: tasdis-microsservices
 build:
   local:
-    useDockerCLI: true
     useBuildkit: true
     concurrency: 0
     push: true
