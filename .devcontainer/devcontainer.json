@@ -30,7 +30,7 @@
 	
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// forwarding gateway port 8080, postgres port 5432, rabbitmq port 15672.
-	"forwardPorts": [8080, 5432, 15672],
+	"forwardPorts": [8085, 5432, 15672],
 
 	// Use 'postStartCommand' to run commands after the container is created like starting minikube.
 	"postStartCommand": 
