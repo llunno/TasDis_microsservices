@@ -37,11 +37,11 @@ spec:
               secretKeyRef:
                 name: rabbitmq
                 key: rabbitmq-password
-        resources:
-          limits:
-            cpu: "2"
-            memory: "512Mi"
-          requests:
-            cpu: "1"
-            memory: "256Mi"
+        # resources:
+        #   limits:
+        #     cpu: "2"
+        #     memory: "512Mi"
+        #   requests:
+        #     cpu: "1"
+        #     memory: "256Mi"
       restartPolicy: Always
