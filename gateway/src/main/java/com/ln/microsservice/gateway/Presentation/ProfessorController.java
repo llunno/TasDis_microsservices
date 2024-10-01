@@ -8,6 +8,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.ln.microsservice.gateway.Business.Documentation.CriarTarefaApiDoc;
 import com.ln.microsservice.gateway.Business.Documentation.NovoProfessorAPiDoc;
+import com.ln.microsservice.gateway.Business.Documentation.ObterTarefasLancadasApiDoc;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -48,6 +49,7 @@ public class ProfessorController {
         return response;
     }
 
+    @ObterTarefasLancadasApiDoc
     @GetMapping("/tarefas/obter-todas")
     public String obterTodasTarefas(@RequestParam UUID professorId) {
         String response = webClient.get().uri("/professor/tarefas/obter-todas?professorId=" + professorId).retrieve().bodyToMono(String.class)

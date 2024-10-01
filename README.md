@@ -34,7 +34,7 @@ The projects provides a [devcontainer](https://containers.dev/) environment to e
 **1.** Run the following command to build the microsservices images, push it to the github registry and deploy it to the kubernetes cluster:
 
 ```bash
-    skaffold dev
+    make skaffold-dev
 ```
 
 **2.** Port forward the gateway services to access the endpoints in Swagger:

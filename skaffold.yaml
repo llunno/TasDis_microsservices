@@ -93,3 +93,16 @@ manifests:
     - kubernetes/tarefa-service.yaml
     - kubernetes/usuario-deployment.yaml
     - kubernetes/usuario-service.yaml
+portForward:
+  - resourceType: service
+    resourceName: gateway-service
+    port: 8085
+    localPort: 8085
+  - resourceType: service
+    resourceName: postgresql
+    port: 5432
+    localPort: 5432
+  - resourceType: service
+    resourceName: rabbitmq
+    port: 15672
+    localPort: 15672
