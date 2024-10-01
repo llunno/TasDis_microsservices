@@ -4,38 +4,78 @@ metadata:
   name: tasdis-microsservices
 build:
   local:
-    useBuildkit: true
-    concurrency: 0
+    # useBuildkit: true
+    # concurrency: 0
     push: true
   artifacts:
     - image: ghcr.io/llunno/tasdis-bff
       context: bff
-      docker:
-        dockerfile: Dockerfile
+      jib:
+        fromImage: gcr.io/distroless/java:debug
+        args:
+          - "-DskipTests"
+      sync:
+        auto: true
+      # docker:
+      #   dockerfile: Dockerfile
     - image: ghcr.io/llunno/tasdis-curso
       context: microsservice_curso
-      docker:
-        dockerfile: Dockerfile
+      jib:
+        fromImage: gcr.io/distroless/java:debug
+        args:
+          - "-DskipTests"
+      sync:
+        auto: true
+      # docker:
+      #   dockerfile: Dockerfile
     - image: ghcr.io/llunno/tasdis-endereco
       context: microsservice_endereco
-      docker:
-        dockerfile: Dockerfile
+      jib:
+        fromImage: gcr.io/distroless/java:debug
+        args:
+          - "-DskipTests"
+      sync:
+        auto: true
+      # docker:
+      #   dockerfile: Dockerfile
     - image: ghcr.io/llunno/tasdis-gateway
       context: gateway
-      docker:
-        dockerfile: Dockerfile
+      jib:
+        fromImage: gcr.io/distroless/java:debug
+        args:
+          - "-DskipTests"
+      sync:
+        auto: true
     - image: ghcr.io/llunno/tasdis-instituicao
       context: microsservice_instituicao
-      docker:
-        dockerfile: Dockerfile
+      jib:
+        fromImage: gcr.io/distroless/java:debug
+        args:
+          - "-DskipTests"
+      sync:
+        auto: true
+      # docker:
+      #   dockerfile: Dockerfile
     - image: ghcr.io/llunno/tasdis-tarefa
       context: microsservice_tarefa
-      docker:
-        dockerfile: Dockerfile
+      jib:
+        fromImage: gcr.io/distroless/java:debug
+        args:
+          - "-DskipTests"
+      sync:
+        auto: true
+      # docker:
+      #   dockerfile: Dockerfile
     - image: ghcr.io/llunno/tasdis-usuario
       context: microsservice_usuario
-      docker:
-        dockerfile: Dockerfile
+      jib:
+        fromImage: gcr.io/distroless/java:debug
+        args:
+          - "-DskipTests"
+      sync:
+        auto: true
+      # docker:
+      #   dockerfile: Dockerfile
 manifests:
   rawYaml:
     - kubernetes/bff-deployment.yaml

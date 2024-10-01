@@ -32,7 +32,7 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 )
 @Operation(
     summary = "Cria uma nova tarefa",
-    description = "Cria uma nova tarefa no sistema"
+    description = "Cria uma nova tarefa no sistema. Tenha certeza que a matéria referenciada existe no sistema antes de tentar criar."
 )
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)

@@ -31,6 +31,8 @@
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// forwarding gateway port 8080, postgres port 5432, rabbitmq port 15672.
 	"forwardPorts": [8085, 5432, 15672],
+	// recursiverly converts files line endings to unix format
+	"postCreateCommand": "find . -type f -print0 | xargs -0 -n 1 -P 4 sudo dos2unix || true",
 
 	// Use 'postStartCommand' to run commands after the container is created like starting minikube.
 	"postStartCommand": 

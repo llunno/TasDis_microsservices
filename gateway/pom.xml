@@ -116,6 +116,16 @@
 					<outputDir>src/main/resources</outputDir>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>3.4.3</version>
+				<configuration>
+					<to>
+						<image>ghcr.io/llunno/tasdis-gateway</image>
+					</to>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 
