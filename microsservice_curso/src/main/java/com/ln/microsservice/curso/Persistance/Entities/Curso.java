@@ -30,5 +30,9 @@ public class Curso {
     @ManyToMany
     private Collection<Materia> materias;
     @Column(name = "instituicao_ensino_id")
-    private Integer instituicaoEnsino;
+    private UUID instituicaoEnsino;
+
+    public void addMateria(Materia materia) {
+        this.materias.add(materia);
+    }
 }

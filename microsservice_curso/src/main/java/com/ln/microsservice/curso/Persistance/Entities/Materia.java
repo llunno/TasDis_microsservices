@@ -27,4 +27,8 @@ public class Materia {
     private String descricao;
     @ManyToMany
     private Collection<Curso> cursos;
+
+    public void addCurso(Curso curso) {
+        this.cursos.add(curso);
+    }
 }
