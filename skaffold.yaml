@@ -6,12 +6,13 @@ build:
   local:
     # useBuildkit: true
     # concurrency: 0
-    push: true
+    # ![IMPORTANT] There is a open issue with jib failling to push images to some docker registries, so to ensure that the images are pushed to the registry, i'm using the docker build with push set to true only when necessary has a workaround.
+    push: false
   artifacts:
     - image: ghcr.io/llunno/tasdis-bff
       context: bff
       jib:
-        fromImage: gcr.io/distroless/java:debug
+        fromImage: gcr.io/distroless/java21:debug
         args:
           - "-DskipTests"
       sync:
@@ -21,7 +22,7 @@ build:
     - image: ghcr.io/llunno/tasdis-curso
       context: microsservice_curso
       jib:
-        fromImage: gcr.io/distroless/java:debug
+        fromImage: gcr.io/distroless/java21:debug
         args:
           - "-DskipTests"
       sync:
@@ -31,7 +32,7 @@ build:
     - image: ghcr.io/llunno/tasdis-endereco
       context: microsservice_endereco
       jib:
-        fromImage: gcr.io/distroless/java:debug
+        fromImage: gcr.io/distroless/java21:debug
         args:
           - "-DskipTests"
       sync:
@@ -41,7 +42,7 @@ build:
     - image: ghcr.io/llunno/tasdis-gateway
       context: gateway
       jib:
-        fromImage: gcr.io/distroless/java:debug
+        fromImage: gcr.io/distroless/java21:debug
         args:
           - "-DskipTests"
       sync:
@@ -49,7 +50,7 @@ build:
     - image: ghcr.io/llunno/tasdis-instituicao
       context: microsservice_instituicao
       jib:
-        fromImage: gcr.io/distroless/java:debug
+        fromImage: gcr.io/distroless/java21:debug
         args:
           - "-DskipTests"
       sync:
@@ -59,7 +60,7 @@ build:
     - image: ghcr.io/llunno/tasdis-tarefa
       context: microsservice_tarefa
       jib:
-        fromImage: gcr.io/distroless/java:debug
+        fromImage: gcr.io/distroless/java21:debug
         args:
           - "-DskipTests"
       sync:
@@ -69,7 +70,7 @@ build:
     - image: ghcr.io/llunno/tasdis-usuario
       context: microsservice_usuario
       jib:
-        fromImage: gcr.io/distroless/java:debug
+        fromImage: gcr.io/distroless/java21:debug
         args:
           - "-DskipTests"
       sync:

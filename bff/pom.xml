@@ -107,6 +107,9 @@
 				<artifactId>jib-maven-plugin</artifactId>
 				<version>3.4.3</version>
 				<configuration>
+					<from>
+						<image>gcr.io/distroless/java21:debug</image>
+					</from>
 					<to>
 						<image>ghcr.io/llunno/tasdis-curso</image>
 					</to>
