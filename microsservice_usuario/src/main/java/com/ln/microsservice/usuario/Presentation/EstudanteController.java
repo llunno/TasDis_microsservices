@@ -6,9 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 import java.util.UUID;
 import com.ln.microsservice.usuario.Business.EstudanteService;
 import com.ln.microsservice.usuario.Business.Utils.Endpoints;
+import com.ln.microsservice.usuario.DTOs.EstudanteDTO;
 
 @RestController
 @RequestMapping(Endpoints.ESTUDANTE)
@@ -25,5 +28,11 @@ public class EstudanteController {
     @GetMapping("/{userId}/instituicoes-matriculadas")
     public ResponseEntity<?> obterInstituicoesMatriculadas(@PathVariable UUID userId) {
         return ResponseEntity.ok().body(service.obterInstituicoesMatriculadas(userId));
+    }
+
+    @GetMapping("obter-todos-estudantes")
+    public ResponseEntity<?> obterTodosEstudantes() {
+        List<EstudanteDTO> estudantes = service.obterTodosEstudantes();
+        return ResponseEntity.ok().body(estudantes);
     }
 }

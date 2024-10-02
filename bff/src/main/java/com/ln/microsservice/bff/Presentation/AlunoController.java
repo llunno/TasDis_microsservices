@@ -14,6 +14,7 @@ import java.util.UUID;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ln.microsservice.bff.Business.Services.EstudanteService;
 import com.ln.microsservice.bff.Business.Services.TarefaService;
+import com.ln.microsservice.bff.DTO.EstudanteDTO;
 import com.ln.microsservice.bff.DTO.EstudanteRegisterReqDTO;
 import com.ln.microsservice.bff.DTO.TarefaDTO;
 
@@ -40,8 +41,14 @@ public class AlunoController {
     }
 
     @PostMapping("/novo-estudante")
-    public ResponseEntity<?> criarEstudante(@RequestBody EstudanteRegisterReqDTO estudante) throws JsonProcessingException {
+    public Boolean criarEstudante(@RequestBody EstudanteRegisterReqDTO estudante) throws JsonProcessingException {
         estudanteService.criarEstudante(estudante);
-        return ResponseEntity.ok().build();
+        return true;
+    }
+
+    @GetMapping("/obter-todos-estudantes")
+    public ResponseEntity<?> obterTodosEstudantes() {
+        List<EstudanteDTO> estudantes = estudanteService.getTodosEstudantes();
+        return ResponseEntity.ok(estudantes);
     }
 }

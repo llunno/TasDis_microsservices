@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -50,5 +51,10 @@ public class EstudanteService {
                 .matricula(estudanteDTO.matricula())
                 .build();
         estudanteRepository.save(estudante);
+    }
+
+    public List<EstudanteDTO> obterTodosEstudantes() {
+        List<Estudante> estudantes = estudanteRepository.findAll();
+        return estudantes.stream().map(EstudanteDTO::new).toList();
     }
 }
