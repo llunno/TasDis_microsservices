@@ -14,6 +14,8 @@ public class AmqpConfig {
     private String estudantesQueueName;
     @Value("${professores.queue}")
     private String professoresQueueName;
+    @Value("${instituicoes.queue}")
+    private String instituicoesQueueName;
 
     @Bean
     public Queue tarefasQueue() {
@@ -28,5 +30,10 @@ public class AmqpConfig {
     @Bean
     public Queue professoresQueue() {
         return new Queue(professoresQueueName, true);
+    }
+
+    @Bean
+    public Queue instituicoesQueue() {
+        return new Queue(instituicoesQueueName, true);
     }
 }

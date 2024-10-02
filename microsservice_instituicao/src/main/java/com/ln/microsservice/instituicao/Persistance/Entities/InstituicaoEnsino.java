@@ -21,6 +21,7 @@ public class InstituicaoEnsino {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+    private String nome;
     private String cnpj;
     private UUID endereco;
     private String numeroContato;

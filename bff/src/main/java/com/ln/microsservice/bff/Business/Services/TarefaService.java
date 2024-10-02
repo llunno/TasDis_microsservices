@@ -39,6 +39,10 @@ public class TarefaService {
 
         List<UUID> cursosId = (List<UUID>) obterIdsRelacoesService.getCursosIdByEstudante(userId);
 
+        if (cursosId == null) {
+            return new ArrayList<>();
+        }
+
         List<TarefaDTO> todasAsTarefas = cursosId.stream()
                 .map(cursoId -> getTarefasPorCurso(cursoId))
                 .flatMap(List::stream)
@@ -54,6 +58,10 @@ public class TarefaService {
 
     public List<TarefaDTO> getTarefasPorCurso(UUID userId) {
         List<UUID> idsCursosMatriculados = (List<UUID>) obterIdsRelacoesService.getCursosIdByEstudante(userId);
+
+        if (idsCursosMatriculados == null) {
+            return new ArrayList<>();
+        }
 
         List<List<MateriaDTO>> materiasPorCurso = idsCursosMatriculados.stream()
                 .map(cursoId -> cursoService.obterMateriasPorCurso(cursoId)).collect(Collectors.toList());
