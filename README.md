@@ -37,12 +37,6 @@ The projects provides a [devcontainer](https://containers.dev/) environment to e
     make skaffold-dev
 ```
 
-**2.** Port forward the gateway services to access the endpoints in Swagger:
-
-```bash
-    kubectl port-forward service/gateway-service 8080:8080
-```
-
-**3.** Access the Swagger UI in the URL `http://localhost:8080/swagger-ui/index.html`.
+**2.** Access the [Swagger UI](http://localhost:8085/api/swagger-ui/index.html) to view API endpoints.
 
 **OBS**: If it isn't the first time you're running a postgresql helm chart, the postgreSQL persistent volume may already be created. In this case, the databases for the microsservices may not be created because custom scripts are only executed when the container is started for the first time. To solve this, make sure to delete the persistent volume claim associated with the postgreSQL deployment.
