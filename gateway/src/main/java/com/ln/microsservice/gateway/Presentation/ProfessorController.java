@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import com.ln.microsservice.gateway.Business.APiResponses.ApiResponsePattern;
 import com.ln.microsservice.gateway.Business.Documentation.CriarTarefaApiDoc;
 import com.ln.microsservice.gateway.Business.Documentation.NovoProfessorAPiDoc;
 import com.ln.microsservice.gateway.Business.Documentation.ObterTarefasLancadasApiDoc;
@@ -44,16 +45,17 @@ public class ProfessorController {
     @NovoProfessorAPiDoc
     @PostMapping("/novo-professor")
     public ResponseEntity<?> novoProfessor(@RequestBody JsonNode entity) {
-        ResponseEntity<?> response = webClient.post().uri("/aluno/novo-professor").bodyValue(entity).retrieve()
+        ResponseEntity<?> response = webClient.post().uri("/professor/novo-professor").bodyValue(entity).retrieve()
                 .bodyToMono(ResponseEntity.class).block();
         return response;
     }
 
     @ObterTarefasLancadasApiDoc
     @GetMapping("/tarefas/obter-todas")
-    public String obterTodasTarefas(@RequestParam UUID professorId) {
-        String response = webClient.get().uri("/professor/tarefas/obter-todas?professorId=" + professorId).retrieve().bodyToMono(String.class)
+    public ResponseEntity<?> obterTodasTarefas(@RequestParam UUID professorId) {
+        JsonNode response = webClient.get().uri("/professor/tarefas/obter-todas?professorId=" + professorId).retrieve().bodyToMono(JsonNode.class)
                 .block();
-        return response;
+        ApiResponsePattern apiResponse = new ApiResponsePattern("Tarefas obtidas com sucesso", response);
+        return ResponseEntity.ok(apiResponse);
     }
 }

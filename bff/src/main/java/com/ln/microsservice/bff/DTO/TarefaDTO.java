@@ -9,6 +9,5 @@ public record TarefaDTO(
         String descricao,
         LocalDateTime prazo,
         Float valorEmPontos,
-        UUID materia,
-        Integer percentualConclusao) {
+        UUID materia) {
 }
