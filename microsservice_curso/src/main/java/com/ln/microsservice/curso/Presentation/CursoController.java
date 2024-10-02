@@ -26,5 +26,4 @@ public class CursoController {
         Collection<MateriaDTO> materias = cursoService.obterMateriasPorCurso(cursoId);
         return ResponseEntity.ok(materias);
     }
-
 }

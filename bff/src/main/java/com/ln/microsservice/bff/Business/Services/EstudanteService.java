@@ -22,10 +22,10 @@ public class EstudanteService {
     private AmqpConfig amqpConfig;
     @Autowired
     private RabbitTemplate rabbitTemplate;
+    private ObjectMapper objectMapper = JsonMapper.builder().findAndAddModules().build();
     @Autowired
     private WebClientInstancesConfig webClientEndpoints;
 
-    private ObjectMapper objectMapper = JsonMapper.builder().findAndAddModules().build();
 
     public void criarEstudante(EstudanteRegisterReqDTO estudante) throws JsonProcessingException {
         String estudanteDtoJson = objectMapper.writeValueAsString(estudante);

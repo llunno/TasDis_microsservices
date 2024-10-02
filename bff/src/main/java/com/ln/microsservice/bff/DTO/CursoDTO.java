@@ -1,9 +1,12 @@
 package com.ln.microsservice.bff.DTO;
 
+import java.util.UUID;
+
 public record CursoDTO(
-        Integer id,
+        UUID id,
         String nome,
         String descricao,
-        Float cargaHoraria) {
+        Float cargaHoraria,
+        UUID instituicaoEnsino) {
 
 }
