@@ -12,7 +12,7 @@ import com.ln.microsservice.gateway.Business.Documentation.ObterTarefasVencidasA
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-import com.ln.microsservice.gateway.Business.APiResponses.ApiResponse;
+import com.ln.microsservice.gateway.Business.APiResponses.ApiResponsePattern;
 import com.ln.microsservice.gateway.Business.Documentation.NovoAlunoApiDoc;
 
 import java.util.UUID;
@@ -38,7 +38,7 @@ public class AlunoController {
     public ResponseEntity<?> getTarefasPendentes(@PathVariable UUID userId) {
         JsonNode response = webClient.get().uri("/aluno/" + userId + "/tarefas").retrieve()
                 .bodyToMono(JsonNode.class).block();
-        ApiResponse apiResponse = new ApiResponse("Tarefas obtidas com sucesso", response);
+        ApiResponsePattern apiResponse = new ApiResponsePattern("Tarefas obtidas com sucesso", response);
         return ResponseEntity.ok(apiResponse);
     }
 
@@ -47,14 +47,14 @@ public class AlunoController {
     public ResponseEntity<?> getTarefasVencidas(@PathVariable UUID userId) {
         JsonNode response = webClient.get().uri("/aluno/" + userId + "/tarefas-vencidas").retrieve()
                 .bodyToMono(JsonNode.class).block();
-        ApiResponse apiResponse = new ApiResponse("Tarefas vencidas obtidas com sucesso", response);
+        ApiResponsePattern apiResponse = new ApiResponsePattern("Tarefas vencidas obtidas com sucesso", response);
         return ResponseEntity.ok(apiResponse);
     }
 
     @NovoAlunoApiDoc
     @PostMapping("/novo-estudante")
     public ResponseEntity<?> novoEstudante(@RequestBody JsonNode entity) {
-        ApiResponse apiResponse = new ApiResponse("Estudante criado com sucesso");
+        ApiResponsePattern apiResponse = new ApiResponsePattern("Estudante criado com sucesso");
         Boolean created = webClient.post().uri("/aluno/novo-estudante").bodyValue(entity).retrieve()
                 .bodyToMono(Boolean.class).block();
         return created ? ResponseEntity.ok(apiResponse) : ResponseEntity.badRequest().body(apiResponse);
@@ -66,7 +66,8 @@ public class AlunoController {
                 .bodyToMono(JsonNode.class)
                 .block();
 
-        ApiResponse response = new ApiResponse("Estudantes obtidos com sucesso", serializedListEstudantesDTO);
+        ApiResponsePattern response = new ApiResponsePattern("Estudantes obtidos com sucesso",
+                serializedListEstudantesDTO);
 
         return ResponseEntity.ok(response);
     }

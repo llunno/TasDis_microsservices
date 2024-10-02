@@ -10,18 +10,18 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class ApiResponse {
+public class ApiResponsePattern {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
     private LocalDateTime timestamp = LocalDateTime.now();
     private String message;
     private Object data;
 
-    public ApiResponse(String message) {
+    public ApiResponsePattern(String message) {
         this.message = message;
         this.data = List.of();
     }
 
-    public ApiResponse(String message, Object data) {
+    public ApiResponsePattern(String message, Object data) {
         this.message = message;
         this.data = data;
     }
