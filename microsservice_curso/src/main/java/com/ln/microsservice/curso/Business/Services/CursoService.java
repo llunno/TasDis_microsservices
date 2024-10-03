@@ -17,16 +17,21 @@ import com.ln.microsservice.curso.DTO.MateriaDTO;
 import com.ln.microsservice.curso.Persistance.Entities.Curso;
 import com.ln.microsservice.curso.Persistance.Entities.Materia;
 import com.ln.microsservice.curso.Persistance.Repositories.CursoRepository;
+import com.ln.microsservice.curso.Persistance.Repositories.MateriaRepository;
+
+import jakarta.persistence.EntityManager;
+
 import java.util.List;
 
 @Service
-@RabbitListener(queues = "${queue.name}")
 public class CursoService {
 
     @Autowired
     private CursoRepository cursoRepository;
+    @Autowired
+    private MateriaRepository materiaRepository;
     private ObjectMapper objectMapper = JsonMapper.builder().findAndAddModules().build();
-
+    private EntityManager entityManager;
 
     public Collection<MateriaDTO> obterMateriasPorCurso(UUID cursoId) {
         Curso curso = cursoRepository.findById(cursoId).orElseThrow();
@@ -34,7 +39,7 @@ public class CursoService {
         return materiasDoCurso.stream().map(MateriaDTO::new).toList();
     }
 
-    @RabbitHandler
+    @RabbitListener(queues = "${cursos.queue}")
     public void criarCurso(@Payload String curso) throws JsonMappingException, JsonProcessingException {
         CursoDTO cursoDTO = objectMapper.readValue(curso, CursoDTO.class);
         Curso cursoEntity = Curso.builder()
@@ -44,5 +49,34 @@ public class CursoService {
                 .instituicaoEnsino(cursoDTO.instituicaoEnsino())
                 .build();
         cursoRepository.save(cursoEntity);
+    }
+
+    @RabbitListener(queues = "${materias.queue}")
+    public void criarMateria(@Payload String materia) throws JsonMappingException, JsonProcessingException {
+        MateriaDTO materiaDTO = objectMapper.readValue(materia, MateriaDTO.class);
+        Materia materiaEntity = Materia.builder()
+                .nome(materiaDTO.nome())
+                .descricao(materiaDTO.descricao())
+                .cursos(materiaDTO.cursosId().stream().map(this::getCursoById).toList())
+                .build();
+        materiaRepository.save(materiaEntity);
+    }
+
+    private Curso getCursoById(UUID cursoId) {
+        try{
+            return entityManager.getReference(Curso.class, cursoId);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    public List<CursoDTO> obterTodosCursos() {
+        List<Curso> cursos = cursoRepository.findAll();
+        return cursos.stream().map(CursoDTO::new).toList();
+    }
+
+    public Collection<MateriaDTO> obterTodasMateriasPorCurso(UUID cursoId) {
+        List<Materia> materias = materiaRepository.findAllByCurso(cursoId);
+        return materias.stream().map(MateriaDTO::new).toList();
     }
 }

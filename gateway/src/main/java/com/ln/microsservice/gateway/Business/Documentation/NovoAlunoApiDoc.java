@@ -25,7 +25,9 @@ import java.lang.annotation.ElementType;
                     "\"email\": \"john.doe@email.com\",\n" +
                     "\"senha\": \"password123\",\n" +
                     "\"matricula\": \"123456\",\n" +
-                    "\"instituicaoEnsino\": \"550e8400-e29b-41d4-a716-446655440003\"\n}"
+                    "\"instituicaoEnsino\": \"550e8400-e29b-41d4-a716-446655440003\",\n" +
+                    "\"cursosMatriculados\": [\"550e8400-e29b-41d4-a716-446655440003\"]" +
+                    "}"
                 )
             }
         ),

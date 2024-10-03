@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 @OpenAPIDefinition(
     info = @Info(
-        title = "Endpoints consumíveis pelo Frontend do sistema TasDis",
+        title = "TasDis Endpoints",
         version = "1",
         description = "Gateway para microsserviços do sistema TasDis." +
                       "TasDis é um sistema distribuído onde professores e alunos podem acompanhar e monitorar suas tarefas acadêmicas." +

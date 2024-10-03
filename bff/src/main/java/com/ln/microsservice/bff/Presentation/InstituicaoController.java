@@ -1,6 +1,7 @@
 package com.ln.microsservice.bff.Presentation;
 
 import java.util.Collection;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,4 +33,9 @@ public class InstituicaoController {
         return ResponseEntity.ok(instituicoes);
     }
 
+    // @GetMapping("/obter-por-id")
+    // public ResponseEntity<?> obterInstituicaoPorId(UUID instituicaoId) {
+    //     InstituicaoEnsinoDTO instituicao = instituicaoService.obterInstituicaoPorId(instituicaoId);
+    //     return ResponseEntity.ok(instituicao);
+    // }
 }

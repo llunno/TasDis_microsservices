@@ -1,6 +1,7 @@
 package com.ln.microsservice.gateway.Presentation;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -9,6 +10,8 @@ import com.ln.microsservice.gateway.Business.APiResponses.ApiResponsePattern;
 import com.ln.microsservice.gateway.Business.Documentation.CriarInstituicaoApiDoc;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
+
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,14 +30,15 @@ public class InstituicaoController {
 
     @CriarInstituicaoApiDoc
     @PostMapping("/criar")
-    public ResponseEntity<?> postMethodName(@RequestBody JsonNode entity) {
-        JsonNode response = webClient.post().uri("/instituicao/criar").bodyValue(entity).retrieve()
+    public ResponseEntity<?> criarInstituicao(@RequestBody JsonNode entity) {
+        webClient.post().uri("/instituicao/criar").bodyValue(entity).retrieve()
                 .bodyToMono(JsonNode.class).block();
-        return ResponseEntity.ok(response);
+        ApiResponsePattern apiResponsePattern = new ApiResponsePattern("Instituicao criada com sucesso");
+        return ResponseEntity.ok(apiResponsePattern);
     }
 
     @GetMapping("/obter-todas")
-    public ResponseEntity<?> getMethodName() {
+    public ResponseEntity<?> obterTodas() {
         JsonNode response = webClient.get().uri("/instituicao/obter-todas").retrieve().bodyToMono(JsonNode.class)
                 .block();
         ApiResponsePattern apiResponsePattern = new ApiResponsePattern("Instituicao", response);

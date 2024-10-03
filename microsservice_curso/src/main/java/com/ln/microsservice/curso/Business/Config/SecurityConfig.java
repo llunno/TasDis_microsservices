@@ -1,4 +1,4 @@
-package com.ln.microsservice.curso.Business.Services.Config;
+package com.ln.microsservice.curso.Business.Config;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Value;

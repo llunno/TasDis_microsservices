@@ -2,6 +2,7 @@ package com.ln.microsservice.instituicao.Business.Services;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -37,5 +38,10 @@ public class InstituicaoService {
     public Collection<InstituicaoEnsinoDTO> obterTodasInstituicoes() {
         List<InstituicaoEnsino> instituicoes = instituicaoRepository.findAll();
         return instituicoes.stream().map(InstituicaoEnsinoDTO::new).toList();
+    }
+
+    public InstituicaoEnsinoDTO obterInstituicaoPorId(UUID instituicaoId) {
+        InstituicaoEnsino instituicao = instituicaoRepository.findById(instituicaoId).orElse(null);
+        return instituicao != null ? new InstituicaoEnsinoDTO(instituicao) : null;
     }
 }

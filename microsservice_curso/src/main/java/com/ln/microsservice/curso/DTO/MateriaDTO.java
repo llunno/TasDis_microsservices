@@ -9,7 +9,7 @@ public record MateriaDTO(
         UUID id,
         String nome,
         String descricao,
-        Collection<UUID> cursoId) {
+        Collection<UUID> cursosId) {
 
     public MateriaDTO(Materia materia) {
         this(materia.getId(), materia.getNome(), materia.getDescricao(),

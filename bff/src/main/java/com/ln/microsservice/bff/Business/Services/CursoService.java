@@ -44,4 +44,33 @@ public class CursoService {
         String cursoDtoJson = objectMapper.writeValueAsString(curso);
         rabbitTemplate.convertAndSend(amqpConfig.cursosQueue().getName(), cursoDtoJson);
     }
+
+    public void criarMateria(MateriaDTO curso) throws JsonProcessingException {
+        String materiaDtoJson = objectMapper.writeValueAsString(curso);
+        rabbitTemplate.convertAndSend(amqpConfig.materiasQueue().getName(), materiaDtoJson);
+    }
+
+    public List<CursoDTO> obterTodosCursos() {
+        List<CursoDTO> cursos = webClientEndpoints.webClientCursoDomain()
+                .get()
+                .uri("/curso/obter-todos-cursos")
+                .retrieve()
+                .bodyToMono(new ParameterizedTypeReference<List<CursoDTO>>() {
+                })
+                .block();
+
+        return cursos;
+    }
+
+    public List<MateriaDTO> obterTodasMateriasPorCurso(UUID cursoId) {
+        List<MateriaDTO> materias = webClientEndpoints.webClientCursoDomain()
+                .get()
+                .uri("/curso/obter-todas-materias-por-curso?cursoId=" + cursoId)
+                .retrieve()
+                .bodyToMono(new ParameterizedTypeReference<List<MateriaDTO>>() {
+                })
+                .block();
+
+        return materias;
+    }
 }

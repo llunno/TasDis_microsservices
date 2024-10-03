@@ -2,6 +2,7 @@ package com.ln.microsservice.bff.Business.Services;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +39,4 @@ public class InstituicaoService {
                 .uri("/instituicao/obter-todas").retrieve().bodyToFlux(InstituicaoEnsinoDTO.class).collectList().block();
         return instituicoes;        
     }
-
 }

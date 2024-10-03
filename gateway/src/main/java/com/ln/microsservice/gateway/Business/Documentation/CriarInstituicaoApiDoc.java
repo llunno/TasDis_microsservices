@@ -26,7 +26,6 @@ import java.lang.annotation.RetentionPolicy;
                 @ExampleObject(
                     name = "Instituicao",
                     value = "{\n" +
-                            "  \"id\": \"550e8400-e29b-41d4-a716-446655440003\",\n" +
                             "  \"nome\": \"Institution ABCEXP\",\n" +
                             "  \"cnpj\": \"123456789\",\n" +
                             // "  \"endereco\": \"123e4567-e89b-12d3-a456-426614174001\",\n" +

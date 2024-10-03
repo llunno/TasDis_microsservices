@@ -8,6 +8,7 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 
 import com.ln.microsservice.bff.Business.Config.WebClientInstancesConfig;
+import com.ln.microsservice.bff.DTO.InstituicaoEnsinoDTO;
 
 @Service
 public class ObterIdsRelacoesService {
@@ -23,5 +24,11 @@ public class ObterIdsRelacoesService {
                 .bodyToMono(new ParameterizedTypeReference<Collection<UUID>>() {
                 })
                 .block();
+    }
+
+    public InstituicaoEnsinoDTO obterInstituicaoPorId(UUID instituicaoId) {
+        InstituicaoEnsinoDTO instituicao = webClientEndpoints.webClientInstituicaoDomain().get()
+                .uri("/instituicao/obter-por-id?instituicaoId=" + instituicaoId).retrieve().bodyToMono(InstituicaoEnsinoDTO.class).block();
+        return instituicao;
     }
 }
