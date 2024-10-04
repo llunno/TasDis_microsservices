@@ -56,22 +56,12 @@ public class TarefaService {
         rabbitTemplate.convertAndSend(tarefasQueue.getName(), tarefaDtoJson);
     }
 
-    public List<TarefaDTO> getTarefasPorCurso(UUID userId) {
-        List<UUID> idsCursosMatriculados = (List<UUID>) obterIdsRelacoesService.getCursosIdByEstudante(userId);
+    public List<TarefaDTO> getTarefasPorCurso(UUID cursoId) {
 
-        if (idsCursosMatriculados == null) {
-            return new ArrayList<>();
-        }
-
-        List<List<MateriaDTO>> materiasPorCurso = idsCursosMatriculados.stream()
-                .map(cursoId -> cursoService.obterMateriasPorCurso(cursoId)).collect(Collectors.toList());
-
-        List<MateriaDTO> materiaisConsolidados = materiasPorCurso.stream()
-                .flatMap(List::stream)
-                .collect(Collectors.toList());
+        List<MateriaDTO> materiasPorCurso = cursoService.obterMateriasPorCurso(cursoId);
 
         List<List<TarefaDTO>> tarefasPorMateria = new ArrayList<>();
-        materiaisConsolidados.forEach(materia -> {
+        materiasPorCurso.forEach(materia -> {
             List<TarefaDTO> tarefa = webClientEndpoints.webClientTarefaDomain()
                     .get()
                     .uri("/tarefa/obter-todas-por-materia?materiaId=" + materia.id())
@@ -87,10 +77,10 @@ public class TarefaService {
                 .collect(Collectors.toList());
     }
 
-    public List<TarefaDTO> getTarefasVencidas(UUID cursoId) {
-        List<TarefaDTO> tarefasPorCurso = getTarefasPorCurso(cursoId);
+    public List<TarefaDTO> getTarefasVencidas(UUID userId) {
+        List<TarefaDTO> tarefasPorAluno = getAllTarefas(userId);
 
-        var tarefasVencidas = tarefasPorCurso.stream()
+        var tarefasVencidas = tarefasPorAluno.stream()
                 .filter(tarefa -> tarefa.prazo().isBefore(LocalDateTime.now()))
                 .collect(Collectors.toList());
 

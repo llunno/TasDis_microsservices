@@ -60,8 +60,7 @@
 				"cweijan.vscode-database-client2",
 				"rohinivsenthil.rabbitrace",
 				"chrisdias.vscode-opennewinstance",
-				"ms-vscode.makefile-tools",
-				"googlecloudtools.cloudcode"
+				"ms-vscode.makefile-tools"
 			]
 		}
 	},

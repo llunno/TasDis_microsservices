@@ -42,8 +42,7 @@ public class TarefaService {
     }
 
     public Collection<TarefaDTO> obterTodasTarefasPorMateria(UUID materiaId) {
-        Collection<Tarefa> tarefas = tarefaRepository.findAllByMateria(materiaId)
-                .orElseThrow(() -> new NullPointerException("Nenhuma tarefa encontrada"));
+        Collection<Tarefa> tarefas = tarefaRepository.findAllByMateria(materiaId);
         return tarefas.stream().map(TarefaDTO::new).collect(Collectors.toList());
     }
 
@@ -52,8 +51,7 @@ public class TarefaService {
     }
 
     public Collection<TarefaDTO> obterTodasTarefasPorProfessor(UUID professorId) {
-        Collection<Tarefa> tarefas = tarefaRepository.findAllByProfessorCriador(professorId)
-                .orElseThrow(() -> new NullPointerException("Nenhuma tarefa encontrada"));
+        Collection<Tarefa> tarefas = tarefaRepository.findAllByProfessorCriador(professorId);
         return tarefas.stream().map(TarefaDTO::new).collect(Collectors.toList());
     }
 }

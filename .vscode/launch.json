@@ -5,34 +5,32 @@
             "name": "curso-microsservice-debug",
             "request": "attach",
             "hostName": "localhost",
+            "projectName": "curso",
             "port": 5006
         },
         {
-            "type": "node",
+            "type": "java",
+            "name": "usuario-microsservice-debug",
             "request": "attach",
-            "name": "curso-microservice",
-            "remoteRoot": "@/app/jib-classpath-file",
-            "localRoot": "${workspaceFolder}",
-            "port": 5005
-        },
-        {
-            "name": "curso-microsservice-debug-attach",
-            "type": "cloudcode.kubernetes",
-            "request": "launch",
-            "skaffoldConfig": "${workspaceFolder}/skaffold.yaml",
-            "watch": true,
-            "cleanUp": true,
-            "portForward": true
+            "hostName": "localhost",
+            "projectName": "usuario",
+            "port": 5011
         },
         {
             "type": "java",
-            "name": "Spring Boot-GatewayApplication<gateway>",
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "mainClass": "com.ln.microsservice.gateway.GatewayApplication",
-            "projectName": "gateway",
-            "args": "",
-            "envFile": "${workspaceFolder}/.env"
+            "name": "bff-microsservice-debug",
+            "request": "attach",
+            "hostName": "localhost",
+            "projectName": "bff",
+            "port": 5005
+        },
+        {
+            "type": "java",
+            "name": "tarefa-microsservice-debug",
+            "request": "attach",
+            "hostName": "localhost",
+            "projectName": "tarefa",
+            "port": 5010
         }
     ]
 }

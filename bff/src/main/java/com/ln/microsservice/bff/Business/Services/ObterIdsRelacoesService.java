@@ -21,8 +21,8 @@ public class ObterIdsRelacoesService {
                 .get()
                 .uri("/estudante/" + estudanteId + "/cursos-matriculados")
                 .retrieve()
-                .bodyToMono(new ParameterizedTypeReference<Collection<UUID>>() {
-                })
+                .bodyToFlux(UUID.class)
+                .collectList()
                 .block();
     }
 

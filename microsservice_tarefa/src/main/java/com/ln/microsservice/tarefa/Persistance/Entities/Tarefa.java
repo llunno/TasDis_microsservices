@@ -40,5 +40,6 @@ public class Tarefa {
         this.prazo = tarefaDTO.prazo();
         this.materia = tarefaDTO.materia();
         this.valorEmPontos = tarefaDTO.valorEmPontos();
+        this.professorCriador = tarefaDTO.professorCriador();
     }
 }
