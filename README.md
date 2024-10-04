@@ -22,7 +22,8 @@ The projects provides a [devcontainer](https://containers.dev/) environment to e
 - [k9s](https://k9scli.io/) (A CLI tool to manage Kubernetes clusters);
 - [Skaffold](https://skaffold.dev/) (A CLI tool to manage the development workflow for Kubernetes applications);
 - Deployed RabbitMQ Helm Chart (A message broker to handle the communication between the services);
-- Deployed PostgreSQL Helm Chart (A database to store the data).
+- Deployed PostgreSQL Helm Chart (A database to store the data);
+- Deployed Zipkin Helm Chart (A distributed tracing system to monitor the services);
 
 **Pre-requisites**:
 
