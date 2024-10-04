@@ -24,7 +24,7 @@ import com.fasterxml.jackson.databind.JsonNode;
                       "<strong>Orientação para testes no Swagger</strong>:\n" +
                       "1. Cadastre pelo menos uma instituição de ensino, um curso para esta instituição e uma matéria para este curso. Use as rotas de obtenção dos dados (GET) para trocar os ips nos modelos da requisição para que as associações sejam criadas corretamente;\n" +
                       "2. Cadastre um professor. O professor é associado a uma ou mais matérias. Esta informação é necessária para que o professor possa criar tarefas para as matérias associadas a ele;\n" +
-                      "3. Crie uma tarefa. A tarefa é associada a uma matéria. A tarefa é o objeto principal do sistema;\n" +
+                      "3. Crie uma tarefa. A tarefa é associada a uma matéria. A tarefa é o objeto principal do sistema. Para cada tarefa criada, é criada uma notificação geral sobre esta criação;\n" +
                       "4. Cadastre um aluno. O aluno é associado a um ou mais cursos. Se alguma matéria presente em um dos cursos que o aluno é matriculado tiver tarefas, este aluno é associado a ela automaticamente.\n" +
                       "5. A partir deste ponto, você pode listas todos os alunos, obter tarefas lançadas por um professor, obter tarefas do aluno, obter tarefas vencidas, etc."
     ),

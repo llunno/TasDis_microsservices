@@ -13,10 +13,17 @@ public class AmqpConfig {
 
     @Value("${queue.name}")
     private String queueName;
+    @Value("${tarefa.criada.queue.name}")
+    private String tarefaCriadaQueueName;
 
     @Bean
     public Queue queue() {
         return new Queue(queueName, true);
+    }
+
+    @Bean
+    public Queue tarefaCriadaQueue() {
+        return new Queue(tarefaCriadaQueueName, true);
     }
 
     @Bean

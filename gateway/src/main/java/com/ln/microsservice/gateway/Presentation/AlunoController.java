@@ -71,4 +71,12 @@ public class AlunoController {
 
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/{userId}/notificacoes-por-professor")
+    public ResponseEntity<?> obterNotificacoes(@PathVariable UUID userId) {
+        JsonNode notificacoes = webClient.get().uri("/aluno/" + userId + "/notificacoes").retrieve()
+                .bodyToMono(JsonNode.class).block();
+        ApiResponsePattern response = new ApiResponsePattern("Notificacoes obtidas com sucesso", notificacoes);
+        return ResponseEntity.ok(response);
+    }
 }

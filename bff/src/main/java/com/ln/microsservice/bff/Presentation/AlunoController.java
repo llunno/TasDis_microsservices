@@ -51,4 +51,9 @@ public class AlunoController {
         List<EstudanteDTO> estudantes = estudanteService.getTodosEstudantes();
         return ResponseEntity.ok(estudantes);
     }
+
+    @GetMapping("/{userId}/notificacoes")
+    public ResponseEntity<?> obterNotificacoes(@PathVariable UUID userId) {
+        return ResponseEntity.ok().body(estudanteService.obterNotificacoes(userId));
+    }
 }
