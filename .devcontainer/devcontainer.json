@@ -5,7 +5,6 @@
 	"runArgs": ["--name=TasDis-Microservices"],
 	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
 	"dockerFile": "Dockerfile",
-
 	"features": {
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {
 			"enableNonRootDocker": "true",
@@ -34,7 +33,7 @@
 
 	// Use 'postStartCommand' to run commands after the container is created like starting minikube.
 	"postStartCommand": 
-		"minikube start --memory=max --cpus=max && curl -sS https://webinstall.dev/k9s | bash && helm upgrade -i rabbitmq oci://registry-1.docker.io/bitnamicharts/rabbitmq && helm upgrade -i -f .devcontainer/pg-values.yaml postgresql oci://registry-1.docker.io/bitnamicharts/postgresql",
+		"minikube start --force --memory 5000 --cpus 4 && curl -sS https://webinstall.dev/k9s | bash && helm upgrade -i rabbitmq oci://registry-1.docker.io/bitnamicharts/rabbitmq && helm upgrade -i -f .devcontainer/pg-values.yaml postgresql oci://registry-1.docker.io/bitnamicharts/postgresql",
 
 	// Configure tool-specific properties.
 	"customizations": {
@@ -61,11 +60,12 @@
 				"cweijan.vscode-database-client2",
 				"rohinivsenthil.rabbitrace",
 				"chrisdias.vscode-opennewinstance",
-				"ms-vscode.makefile-tools"
+				"ms-vscode.makefile-tools",
+				"googlecloudtools.cloudcode"
 			]
 		}
-	}
+	},
 
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
+	"remoteUser": "root"
 }

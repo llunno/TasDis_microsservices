@@ -1,6 +1,5 @@
 package com.ln.microsservice.curso.Business.Services;
 
-import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -19,8 +18,6 @@ import com.ln.microsservice.curso.Persistance.Entities.Materia;
 import com.ln.microsservice.curso.Persistance.Repositories.CursoRepository;
 import com.ln.microsservice.curso.Persistance.Repositories.MateriaRepository;
 
-import jakarta.persistence.EntityManager;
-
 import java.util.List;
 
 @Service
@@ -31,7 +28,6 @@ public class CursoService {
     @Autowired
     private MateriaRepository materiaRepository;
     private ObjectMapper objectMapper = JsonMapper.builder().findAndAddModules().build();
-    private EntityManager entityManager;
 
     public Collection<MateriaDTO> obterMateriasPorCurso(UUID cursoId) {
         Curso curso = cursoRepository.findById(cursoId).orElseThrow();
@@ -57,17 +53,13 @@ public class CursoService {
         Materia materiaEntity = Materia.builder()
                 .nome(materiaDTO.nome())
                 .descricao(materiaDTO.descricao())
-                .cursos(materiaDTO.cursosId().stream().map(this::getCursoById).toList())
+                .curso(getCursoById(materiaDTO.curso()))
                 .build();
         materiaRepository.save(materiaEntity);
     }
 
     private Curso getCursoById(UUID cursoId) {
-        try{
-            return entityManager.getReference(Curso.class, cursoId);
-        } catch (Exception e) {
-            return null;
-        }
+        return cursoRepository.findById(cursoId).orElse(null);
     }
 
     public List<CursoDTO> obterTodosCursos() {

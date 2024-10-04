@@ -11,10 +11,11 @@ public record TarefaDTO(
         String descricao,
         LocalDateTime prazo,
         Float valorEmPontos,
-        UUID materia) implements Serializable {
+        UUID materia,
+        UUID professorCriador) implements Serializable {
 
     public TarefaDTO(Tarefa tarefa) {
         this(tarefa.getId(), tarefa.getTitulo(), tarefa.getDescricao(), tarefa.getPrazo(), tarefa.getValorEmPontos(),
-                tarefa.getMateria());
+                tarefa.getMateria(), tarefa.getProfessorCriador());
     }
 }

@@ -1,7 +1,22 @@
 {
     "configurations": [
         {
-            "name": "Kubernetes: Run/Debug",
+            "type": "java",
+            "name": "curso-microsservice-debug",
+            "request": "attach",
+            "hostName": "localhost",
+            "port": 5006
+        },
+        {
+            "type": "node",
+            "request": "attach",
+            "name": "curso-microservice",
+            "remoteRoot": "@/app/jib-classpath-file",
+            "localRoot": "${workspaceFolder}",
+            "port": 5005
+        },
+        {
+            "name": "curso-microsservice-debug-attach",
             "type": "cloudcode.kubernetes",
             "request": "launch",
             "skaffoldConfig": "${workspaceFolder}/skaffold.yaml",

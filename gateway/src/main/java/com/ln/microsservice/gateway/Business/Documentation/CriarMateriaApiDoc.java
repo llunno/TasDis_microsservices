@@ -26,7 +26,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
                     "  \"nome\": \"Matéria ABC\",\n" +
                     "  \"descricao\": \"Example description\",\n" +
                     "  \"cargaHoraria\": 40,\n" +
-                    "  \"cursosId\":  [\"123e4567-e89b-12d3-a456-426614174000\"]\n" +
+                    "  \"curso\":  \"123e4567-e89b-12d3-a456-426614174000\"\n" +
                     "}"
         )
     )

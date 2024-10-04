@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,10 +26,10 @@ public class Materia {
     private UUID id;
     private String nome;
     private String descricao;
-    @ManyToMany
-    private Collection<Curso> cursos;
+    @ManyToOne
+    private Curso curso;
 
     public void addCurso(Curso curso) {
-        this.cursos.add(curso);
+        this.curso = curso;
     }
 }

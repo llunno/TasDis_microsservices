@@ -31,6 +31,7 @@ public class InstituicaoService {
         InstituicaoEnsino instituicao = InstituicaoEnsino.builder()
                 .nome(instituicaoDTO.nome())
                 .numeroContato(instituicaoDTO.numeroContato())
+                .cnpj(instituicaoDTO.cnpj())
                 .build();
         instituicaoRepository.save(instituicao);
     }

@@ -23,7 +23,9 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
                     "\"descricao\": \"Descrição da tarefa 1\",\n" + 
                     "\"prazo\": \"2021-12-31T23:59:59\",\n" +
                     "\"valorEmPontos\": 1,\n" +
-                    "\"materia\": \"5e3429a5-2358-412b-be68-94e9d82cca5d\"\n}",
+                    "\"materia\": \"5e3429a5-2358-412b-be68-94e9d82cca5d\"\n," +
+                    "\"professorCriador\": \"5e3429a5-2358-412b-be68-94e9d82cca5d\"" +
+                    "}",
                     summary = "Exemplo de requisição para criar uma nova tarefa"
                 )
             }

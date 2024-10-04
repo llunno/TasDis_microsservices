@@ -9,10 +9,10 @@ public record MateriaDTO(
         UUID id,
         String nome,
         String descricao,
-        Collection<UUID> cursosId) {
+        UUID curso) {
 
     public MateriaDTO(Materia materia) {
         this(materia.getId(), materia.getNome(), materia.getDescricao(),
-                materia.getCursos().stream().map(curso -> curso.getId()).toList());
+                materia.getCurso().getId());
     }
 }
