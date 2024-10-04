@@ -106,3 +106,7 @@ portForward:
     resourceName: rabbitmq
     port: 15672
     localPort: 15672
+  - resourceType: service
+    resourceName: zipkin
+    port: 9411
+    localPort: 9411

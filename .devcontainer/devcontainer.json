@@ -33,7 +33,7 @@
 
 	// Use 'postStartCommand' to run commands after the container is created like starting minikube.
 	"postStartCommand": 
-		"minikube start --force --memory 5000 --cpus 4 && curl -sS https://webinstall.dev/k9s | bash && helm upgrade -i rabbitmq oci://registry-1.docker.io/bitnamicharts/rabbitmq && helm upgrade -i -f .devcontainer/pg-values.yaml postgresql oci://registry-1.docker.io/bitnamicharts/postgresql",
+		"minikube start --force --memory 5000 --cpus 4 && curl -sS https://webinstall.dev/k9s | bash && helm upgrade -i rabbitmq oci://registry-1.docker.io/bitnamicharts/rabbitmq && helm upgrade -i -f .devcontainer/pg-values.yaml postgresql oci://registry-1.docker.io/bitnamicharts/postgresql && helm install zipkin oci://registry-1.docker.io/bitnamicharts/zipkin",
 
 	// Configure tool-specific properties.
 	"customizations": {

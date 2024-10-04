@@ -11,11 +11,13 @@ import com.ln.microsservice.gateway.Business.Documentation.ObterTarefasVencidasA
 
 import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.extern.java.Log;
 
 import com.ln.microsservice.gateway.Business.APiResponses.ApiResponsePattern;
 import com.ln.microsservice.gateway.Business.Documentation.NovoAlunoApiDoc;
 
 import java.util.UUID;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
+@Log
 @RequestMapping("/aluno")
 @Tag(name = "Aluno", description = "Endpoints para o contexto do aluno")
 public class AlunoController {
@@ -36,6 +39,7 @@ public class AlunoController {
     @ObterTarefasApiDoc
     @GetMapping("/{userId}/tarefas")
     public ResponseEntity<?> getTarefasPendentes(@PathVariable UUID userId) {
+        log.info("Tarefas obtidas com sucesso");
         JsonNode response = webClient.get().uri("/aluno/" + userId + "/tarefas").retrieve()
                 .bodyToMono(JsonNode.class).block();
         ApiResponsePattern apiResponse = new ApiResponsePattern("Tarefas obtidas com sucesso", response);
@@ -45,6 +49,7 @@ public class AlunoController {
     @ObterTarefasVencidasApiDoc
     @GetMapping("/{userId}/tarefas-vencidas")
     public ResponseEntity<?> getTarefasVencidas(@PathVariable UUID userId) {
+        log.info("Tarefas vencidas obtidas com sucesso");
         JsonNode response = webClient.get().uri("/aluno/" + userId + "/tarefas-vencidas").retrieve()
                 .bodyToMono(JsonNode.class).block();
         ApiResponsePattern apiResponse = new ApiResponsePattern("Tarefas vencidas obtidas com sucesso", response);
@@ -55,6 +60,7 @@ public class AlunoController {
     @PostMapping("/novo-estudante")
     public ResponseEntity<?> novoEstudante(@RequestBody JsonNode entity) {
         ApiResponsePattern apiResponse = new ApiResponsePattern("Estudante criado com sucesso");
+        log.info("Estudante criado com sucesso");
         Boolean created = webClient.post().uri("/aluno/novo-estudante").bodyValue(entity).retrieve()
                 .bodyToMono(Boolean.class).block();
         return created ? ResponseEntity.ok(apiResponse) : ResponseEntity.badRequest().body(apiResponse);
@@ -68,7 +74,7 @@ public class AlunoController {
 
         ApiResponsePattern response = new ApiResponsePattern("Estudantes obtidos com sucesso",
                 serializedListEstudantesDTO);
-
+        log.info("Estudantes obtidos com sucesso");
         return ResponseEntity.ok(response);
     }
 
@@ -77,6 +83,7 @@ public class AlunoController {
         JsonNode notificacoes = webClient.get().uri("/aluno/" + userId + "/notificacoes").retrieve()
                 .bodyToMono(JsonNode.class).block();
         ApiResponsePattern response = new ApiResponsePattern("Notificacoes obtidas com sucesso", notificacoes);
+        log.info("Notificacoes obtidas com sucesso");
         return ResponseEntity.ok(response);
     }
 }
